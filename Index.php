@@ -11,10 +11,42 @@
     <style>
     .error {color: #FF0000;}
     </style>
+
+    <script type="text/javascript">
+        function getActors(){
+            var date = document.getElementById("birthdate").value;
+            if(typeof date == "undefined"|| date == null || date === ""){
+                alert("Please enter a date");
+                return;
+            }
+            var birthDate = new Date(date);
+            var day = birthDate.getDate();
+            var month = birthDate.getMonth()+1;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("POST", "API_Ops.php", true);
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xmlhttp.send("day=" + day + "&month=" + month );
+            xmlhttp.onload = function() {
+                var actors = this.responseText;
+                var actorsList = JSON.parse(actors);
+                for(var i = 0; i < actorsList.length; i++){
+                    var item = document.createElement("li");
+                    item.appendChild(document.createTextNode(actorsList[i]));
+                    document.getElementById("actors").appendChild(item);
+                }
+            }
+        }
+    </script>
 </head>
 <body>
+<<<<<<< Updated upstream
 <?php 
 $nameErr = $emailErr = $user_nameErr = $birthErr = $addressErr = $phoneErr = $passErr = $confirmPassErr = $imageErr = "";
+=======
+
+<?php
+$nameErr = $emailErr = $birthErr = $user_nameErr = $addressErr = $phoneErr = $passErr = $confirmPassErr = $imageErr = "";
+>>>>>>> Stashed changes
 $name = $email = $user_name = $birthdate = $address = $phone = $password = $confirm_password = $image = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -120,9 +152,11 @@ $name = $email = $user_name = $birthdate = $address = $phone = $password = $conf
         User Name: <input type="text" name="user_name" placeholder="Enter your user name" value="<?php echo $user_name;?>">
         <span class="error">* <?php echo $user_nameErr;?></span>
         <br><br>
-        Birthdate: <input type="date" name="birthdate" placeholder="Enter your birthdate" value="<?php echo $birthdate;?>">
+        Birthdate: <input type="date" id = "birthdate" name="birthdate" placeholder="Enter your birthdate" value="<?php echo $birthdate;?>">
         <span class="error">* <?php echo $birthErr;?></span>
+        <button type="button" onclick= "getActors()">actor’s names born on the same day</button>
         <br><br>
+        <ol id="actors"></ol>
         Phone: <input type="text" name="phone" placeholder="Enter your phone" value="<?php echo $phone;?>">
         <span class="error">* <?php echo $phoneErr;?></span>
         <br><br>
@@ -143,7 +177,13 @@ $name = $email = $user_name = $birthdate = $address = $phone = $password = $conf
         <br><br>
         <input type="submit" name="submit" value="Submit">
     </form>
+<<<<<<< Updated upstream
 <?php include ('footer.php');?>
+=======
+    
+
+<?php include 'footer.php';?>
+>>>>>>> Stashed changes
 
     
 </body>
