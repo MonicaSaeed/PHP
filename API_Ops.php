@@ -27,7 +27,7 @@ $err = curl_error($curl);
 if ($err) {
 	echo "cURL Error #:" . $err;
 }else{
-	foreach(json_decode($response) as $key => $value){
+	foreach(json_decode($response) as $value){
 		$nconst = explode("/",$value)[2];
 		curl_setopt($curl, CURLOPT_URL, "https://online-movie-database.p.rapidapi.com/actors/get-bio?nconst=$nconst");
 		$response = curl_exec($curl);
@@ -43,6 +43,7 @@ if ($err) {
 
 
 curl_close($curl);
+//array->string
 echo json_encode($actors);
 
 ?>

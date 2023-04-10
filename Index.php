@@ -28,7 +28,7 @@
             xmlhttp.send("day=" + day + "&month=" + month );
             xmlhttp.onload = function() {
                 var actors = this.responseText;
-                var actorsList = JSON.parse(actors);
+                var actorsList = JSON.parse(actors); //string->array
                 for(var i = 0; i < actorsList.length; i++){
                     var item = document.createElement("li");
                     item.appendChild(document.createTextNode(actorsList[i]));
@@ -40,8 +40,8 @@
 </head>
 <body>
 <?php 
-$nameErr = $emailErr = $user_nameErr = $birthErr = $addressErr = $phoneErr = $passErr = $confirmPassErr = $imageErr = "";
-$name = $email = $user_name = $birthdate = $address = $phone = $password = $confirm_password = $image = "";
+    $nameErr = $emailErr = $user_nameErr = $birthErr = $addressErr = $phoneErr = $passErr = $confirmPassErr = $imageErr = "";
+    $name = $email = $user_name = $birthdate = $address = $phone = $password = $confirm_password = $image = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["name"])) {
@@ -52,97 +52,94 @@ $name = $email = $user_name = $birthdate = $address = $phone = $password = $conf
             $nameErr = "Only letters and white space allowed";
           }
         }
-    if (empty($_POST["user_name"])) {
-        $user_nameErr = "User name is required";
-    } else {
-        $user_name = $_POST["user_name"];
+
+        if (empty($_POST["user_name"])) {
+            $user_nameErr = "User name is required";
+        } else {
+            $user_name = $_POST["user_name"];
+        } 
         
-    } 
-    if (empty($_POST["birthdate"])) {
-        $birthErr = "Birthdate is required";
-    } else {
-        $birthdate = date('Y-m-d', strtotime($_POST['birthdate']));
-        $age = date_diff(date_create($birthdate), date_create('now'))->y;
-        if ($age <= 13) {
-            $birthErr = "You are not eligible to register";
+        if (empty($_POST["birthdate"])) {
+            $birthErr = "Birthdate is required";
+        } else {
+            $birthdate = date('Y-m-d', strtotime($_POST['birthdate']));
+            $age = date_diff(date_create($birthdate), date_create('now'))->y;
+            if ($age <= 13) {
+                $birthErr = "You are not eligible to register";
+            }
         }
-    }
+        
+        if (empty($_POST["phone"])) {
+            $phoneErr = "Phone is required";
+        } else {
+            $phone = $_POST["phone"];
+            if(!preg_match("/^[0-9]{11}$/",$phone)){
+                $phoneErr = "invalid phone number";
+            }
+        }
+        
+        if (empty($_POST["address"])) {
+            $addressErr = "Address is required";
+        } else {
+            $address = $_POST["address"];
+            
+        }
     
-    if (empty($_POST["phone"])) {
-        $phoneErr = "Phone is required";
-    } else {
-        $phone = $_POST["phone"];
-        if(!preg_match("/^[0-9]{11}$/",$phone)){
-            $phoneErr = "invalid phone number";
+        if (empty($_POST["password"])) {
+            $passErr = "Password is required";
+        } else {
+            $password = $_POST["password"];
+            if(!preg_match("/[0-9]+/",$password)){
+                $passErr = "at least one number";
+            }
+            if(!preg_match("/[#?!@$%^&*-+]+/",$password)){
+                $passErr .= " at least one special character";
+            }
+            if(!preg_match("/^.{8,}$/",$password)){
+                $passErr .= " Minimum eight characters";
+            }    
         }
-    }
-      
-      if (empty($_POST["address"])) {
-          $addressErr = "Address is required";
-      } else {
-          $address = $_POST["address"];
-          
-      }
-  
-      
-  
-      if (empty($_POST["password"])) {
-          $passErr = "Password is required";
-      } else {
-          $password = $_POST["password"];
-          if(!preg_match("/[0-9]+/",$password)){
-              $passErr = "at least one number";
-          }
-          if(!preg_match("/[#?!@$%^&*-+]+/",$password)){
-              $passErr .= " at least one special character";
-          }
-          if(!preg_match("/^.{8,}$/",$password)){
-              $passErr .= " Minimum eight characters";
-          }    
-      }
-      if (empty($_POST["confirm_password"])) {
-          $confirmPassErr = "Confirm password is required";
-      } else {
-          $confirm_password = $_POST["confirm_password"];
-          if($password != $confirm_password){
-              $confirmPassErr = "Password not matched";
-          }
-      }
-  
-      if (empty($_POST["image"])) {
-          $imageErr = "Image is required";
-      } else {
-          $image = $_POST["image"];
-          
-      }
-      if (empty($_POST["email"])) {
-        $emailErr = "Email is required";
-      } else {
-        $email = $_POST["email"];
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          $emailErr = "Invalid email format";
+        if (empty($_POST["confirm_password"])) {
+            $confirmPassErr = "Confirm password is required";
+        } else {
+            $confirm_password = $_POST["confirm_password"];
+            if($password != $confirm_password){
+                $confirmPassErr = "Password not matched";
+            }
         }
-      }
-      if(isset($_POST['submit'])){
-          if($nameErr == "" && $emailErr == "" && $user_nameErr == "" && $birthErr == "" && $addressErr == "" && $phoneErr == "" && $passErr == "" && $confirmPassErr == "" && $imageErr == ""){
-              echo "Registration Successful";
-              
-          }
-          else{
-              echo "Registration Failed";
-          }
+
+        if (empty($_POST["image"])) {
+            $imageErr = "Image is required";
+        } else {
+            $image = $_POST["image"]; 
+        }
+
+        if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+        } else {
+            $email = $_POST["email"];
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Invalid email format";
+            }
+        }
+
+        if(isset($_POST['submit'])){
+            if($nameErr == "" && $emailErr == "" && $user_nameErr == "" && $birthErr == "" && $addressErr == "" && $phoneErr == "" && $passErr == "" && $confirmPassErr == "" && $imageErr == ""){
+                db_insert($name,$user_name,$birthdate,$phone,$address,$password,$image,$email);
+            }
+        }
         
-  }
-  }
+    }
 ?>
 <?php include 'header.php';?>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+<div id="form">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
         <!-- value: save input after submit  -->
         Name: <input type="text" name="name" placeholder="Enter your name" value="<?php echo $name;?>">
         <span class="error">* <?php echo $nameErr;?></span>
         <br><br>
-       
+    
         User Name: <input type="text" name="user_name" placeholder="Enter your user name" value="<?php echo $user_name;?>">
         <span class="error">* <?php echo $user_nameErr;?></span>
         <br><br>
@@ -171,6 +168,7 @@ $name = $email = $user_name = $birthdate = $address = $phone = $password = $conf
         <br><br>
         <input type="submit" name="submit" value="Submit">
     </form>
+</div>
 <?php include 'footer.php';?>
 
     
