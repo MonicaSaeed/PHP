@@ -39,14 +39,8 @@
     </script>
 </head>
 <body>
-<<<<<<< Updated upstream
 <?php 
 $nameErr = $emailErr = $user_nameErr = $birthErr = $addressErr = $phoneErr = $passErr = $confirmPassErr = $imageErr = "";
-=======
-
-<?php
-$nameErr = $emailErr = $birthErr = $user_nameErr = $addressErr = $phoneErr = $passErr = $confirmPassErr = $imageErr = "";
->>>>>>> Stashed changes
 $name = $email = $user_name = $birthdate = $address = $phone = $password = $confirm_password = $image = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -177,13 +171,7 @@ $name = $email = $user_name = $birthdate = $address = $phone = $password = $conf
         <br><br>
         <input type="submit" name="submit" value="Submit">
     </form>
-<<<<<<< Updated upstream
-<?php include ('footer.php');?>
-=======
-    
-
 <?php include 'footer.php';?>
->>>>>>> Stashed changes
 
     
 </body>
