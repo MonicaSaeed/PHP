@@ -22,9 +22,9 @@ function db_insert($full_name,$username,$birthdate,$phone,$address,$password,$us
 
     else
     {
-        $query ="insert into users(full_name,user_name,birthdate,phone,address,password,user_image,email) VALUES ('$full_name','$username','$birthdate', '$phone','$address','$password','$confirm_password','$user_image', '$email');";
+        $query ="insert into users(full_name,user_name,birthdate,phone,address,password,user_image,email) VALUES ('$full_name','$username','$birthdate', '$phone','$address','$password','$user_image', '$email');";
         mysqli_query($con,$query);
-        echo "added sufulley";
+        echo "added successfully";
     }
     
 }

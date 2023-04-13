@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>registeration form</title>
+    <title>Registration form</title>
     <style>
     .error {color: #FF0000;}
     </style>
@@ -107,12 +107,13 @@
                 $confirmPassErr = "Password not matched";
             }
         }
-
-        if (empty($_POST["image"])) {
+       
+       /* if (empty($_POST["image"])) {
             $imageErr = "Image is required";
         } else {
             $image = $_POST["image"]; 
-        }
+        }*/
+        $image =$_FILES["image"]["name"];
 
         if (empty($_POST["email"])) {
             $emailErr = "Email is required";
@@ -134,13 +135,13 @@
 <?php include 'header.php';?>
 
 <div id="form">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+    <form action='Upload.php' method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
         <!-- value: save input after submit  -->
-        Name: <input type="text" name="name" placeholder="Enter your name" value="<?php echo $name;?>">
+        Fullname: <input type="text" name="name" placeholder="Enter your name" value="<?php echo $name;?>">
         <span class="error">* <?php echo $nameErr;?></span>
         <br><br>
     
-        User Name: <input type="text" name="user_name" placeholder="Enter your user name" value="<?php echo $user_name;?>">
+        Username: <input type="text" name="user_name" placeholder="Enter your user name" value="<?php echo $user_name;?>">
         <span class="error">* <?php echo $user_nameErr;?></span>
         <br><br>
         Birthdate: <input type="date" id = "birthdate" name="birthdate" placeholder="Enter your birthdate" value="<?php echo $birthdate;?>">
@@ -160,13 +161,13 @@
         Confirm Password: <input type="password" name="confirm_password" placeholder="Confirm your password" value="<?php echo $confirm_password;?>">
         <span class="error">* <?php echo $confirmPassErr;?></span>
         <br><br>
-        Image: <input type="file" name="image" placeholder="Enter your image" value="<?php echo $image;?>">
+        Image: <input type="file" name="image" placeholder="Enter your image" value="<?php echo $image;?>" required>
         <span class="error">* <?php echo $imageErr;?></span>
         <br><br>
         E-mail: <input type="text" name="email" placeholder="Enter your email" (required) value="<?php echo $email;?>">
         <span class="error">* <?php echo $emailErr;?></span>
         <br><br>
-        <input type="submit" name="submit" value="Submit">
+        <input type="submit" name="submit" value="Submit" >
     </form>
 </div>
 <?php include 'footer.php';?>
