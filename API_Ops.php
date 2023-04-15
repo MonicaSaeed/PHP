@@ -17,7 +17,7 @@ curl_setopt_array($curl, [
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => [
 		"X-RapidAPI-Host: online-movie-database.p.rapidapi.com",
-		"X-RapidAPI-Key: 9bc40ad5b4mshd8ba5b1bd0c63aep148b41jsnc38c7b9da8e8",
+		"X-RapidAPI-Key: eab66ac94emshc40c681dc0c2011p11699fjsn55e3313335bc",
         "Content-Type:application/json"
 	],
 ]);
