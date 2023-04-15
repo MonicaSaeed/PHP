@@ -1,5 +1,6 @@
 <?php
- include("DB_Ops.php"); 
+ include("DB_Ops.php");
+ include("Upload.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,12 +109,11 @@
             }
         }
        
-       /* if (empty($_POST["image"])) {
+        if (empty($_FILES["image"]["name"])) {
             $imageErr = "Image is required";
         } else {
-            $image = $_POST["image"]; 
-        }*/
-        $image =$_FILES["image"]["name"];
+            $image = $_FILES["image"]["name"]; 
+        }
 
         if (empty($_POST["email"])) {
             $emailErr = "Email is required";
@@ -126,7 +126,10 @@
 
         if(isset($_POST['submit'])){
             if($nameErr == "" && $emailErr == "" && $user_nameErr == "" && $birthErr == "" && $addressErr == "" && $phoneErr == "" && $passErr == "" && $confirmPassErr == "" && $imageErr == ""){
-                db_insert($name,$user_name,$birthdate,$phone,$address,$password,$image,$email);
+                if(db_insert($name,$user_name,$birthdate,$phone,$address,$password,$image,$email)){
+                    uploadImage();
+                }
+                
             }
         }
         
@@ -135,7 +138,7 @@
 <?php include 'header.php';?>
 
 <div id="form">
-    <form action='Upload.php' method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+    <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
         <!-- value: save input after submit  -->
         Fullname: <input type="text" name="name" placeholder="Enter your name" value="<?php echo $name;?>">
         <span class="error">* <?php echo $nameErr;?></span>
@@ -161,10 +164,10 @@
         Confirm Password: <input type="password" name="confirm_password" placeholder="Confirm your password" value="<?php echo $confirm_password;?>">
         <span class="error">* <?php echo $confirmPassErr;?></span>
         <br><br>
-        Image: <input type="file" name="image" placeholder="Enter your image" value="<?php echo $image;?>" required>
+        Image: <input type="file" name="image" placeholder="Enter your image" value="<?php echo $image;?>">
         <span class="error">* <?php echo $imageErr;?></span>
         <br><br>
-        E-mail: <input type="text" name="email" placeholder="Enter your email" (required) value="<?php echo $email;?>">
+        E-mail: <input type="text" name="email" placeholder="Enter your email" value="<?php echo $email;?>">
         <span class="error">* <?php echo $emailErr;?></span>
         <br><br>
         <input type="submit" name="submit" value="Submit" >

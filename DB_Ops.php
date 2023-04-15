@@ -25,6 +25,7 @@ function db_insert($full_name,$username,$birthdate,$phone,$address,$password,$us
         $query ="insert into users(full_name,user_name,birthdate,phone,address,password,user_image,email) VALUES ('$full_name','$username','$birthdate', '$phone','$address','$password','$user_image', '$email');";
         mysqli_query($con,$query);
         echo "added successfully";
+        return true;
     }
     
 }
