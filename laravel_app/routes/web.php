@@ -14,9 +14,9 @@ use App\Http\Controllers\FormValidation;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::view('/','Pages.welcome');
 Route::post('/index',[FormValidation::class,'checkErrors'])->name('checkErrors');
 Route::view('/index','Pages.Index');
+Route::view('/register','Pages.Index');
+
