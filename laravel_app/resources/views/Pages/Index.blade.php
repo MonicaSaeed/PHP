@@ -1,10 +1,17 @@
-<div id="form">
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
 
+@if (Session::has('success'))
+     <div class="alert alert-success">
+         {{ Session::get('success') }}
+     </div>
+@endif
+
+<style>
+    .error{
+        color: red;
+    }
+</style>
+
+<div id="form">
     <form method="post" action="{{ route('checkErrors') }}" >  
         @csrf
 

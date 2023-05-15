@@ -29,7 +29,8 @@ class FormValidation extends Controller
             'birthdate'=>'required'
             
             ]);
-
-        return back()->with('success', 'Your form has been submitted.');
+        //if no errors return success message
+        return back()->with('success','Form submitted successfully!');
+        
     }
 }
