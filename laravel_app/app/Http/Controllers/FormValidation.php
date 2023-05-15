@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Member;
 
 class FormValidation extends Controller
 {
@@ -29,6 +30,15 @@ class FormValidation extends Controller
             'birthdate'=>'required'
             
             ]);
+            $member = new Member;
+            $member->Fullname = $req->input('name'); // Updated to use 'name' instead of 'Fullname'
+            $member->Username = $req->input('user_name'); // Updated to use 'user_name'
+            $member->Birthdate = $req->input('birthdate'); // Updated to use 'birthdate'
+            $member->Phone = $req->input('phone'); // Updated to use 'phone' instead of 'Phone'
+            $member->Address = $req->input('address'); // Updated to use 'address'
+            $member->Password = $req->input('password'); // Updated to use 'password'
+            $member->Email = $req->input('email'); // Updated to use 'email'
+            $member->save();
         //if no errors return success message
         return back()->with('success','Form submitted successfully!');
         
