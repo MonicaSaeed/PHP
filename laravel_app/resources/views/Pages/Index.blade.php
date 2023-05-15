@@ -10,7 +10,7 @@
         color: red;
     }
 </style>
-
+@include('Pages.Header')
 <div id="form">
     <form method="post" action="{{ route('checkErrors') }}" >  
         @csrf
@@ -45,3 +45,4 @@
         <input type="submit" name="submit" value="Submit" >
     </form>
 </div>
+@include('Pages.Footer')
