@@ -14,9 +14,12 @@ use App\Http\Controllers\FormValidation;
 |
 */
 
+Route::group(['prefix', '{locale}'], function () {
 
-Route::view('/','Pages.welcome');
-Route::post('/index',[FormValidation::class,'checkErrors'])->name('checkErrors');
-Route::view('/index','Pages.Index');
-Route::view('/register','Pages.Index');
+    Route::get('/', function () {return view('/', 'Pages.welcome');})->middleware('setLocale');
+});
+Route::view('/', 'Pages.welcome') ;
+Route::post('/index', [FormValidation::class,'checkErrors'])->name('checkErrors');
+Route::view('/index', 'Pages.Index');
+Route::view('/register', 'Pages.Index');
 
