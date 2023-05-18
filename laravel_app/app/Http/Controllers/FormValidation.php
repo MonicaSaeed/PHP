@@ -31,16 +31,26 @@ class FormValidation extends Controller
             
             ]);
             $member = new Member;
-            $member->Fullname = $req->input('name'); // Updated to use 'name' instead of 'Fullname'
-            $member->Username = $req->input('user_name'); // Updated to use 'user_name'
-            $member->Birthdate = $req->input('birthdate'); // Updated to use 'birthdate'
-            $member->Phone = $req->input('phone'); // Updated to use 'phone' instead of 'Phone'
-            $member->Address = $req->input('address'); // Updated to use 'address'
-            $member->Password = $req->input('password'); // Updated to use 'password'
-            $member->Email = $req->input('email'); // Updated to use 'email'
-            $member->save();
+            $username = $req->input('user_name');
+            $existingUser = Member::where('username',$username)->first();
+            if ($existingUser) {
+                return back()->withErrors(['The username already exists. Please choose a different username.']);
+            }
+            
+        
+                $member->fullname = $req->input('name'); // Updated to use 'name' instead of 'Fullname'
+                $member->username = $req->input('user_name'); // Updated to use 'user_name'
+                $member->birthdate = $req->input('birthdate'); // Updated to use 'birthdate'
+                $member->phone = $req->input('phone'); // Updated to use 'phone' instead of 'Phone'
+                $member->address = $req->input('address'); // Updated to use 'address'
+                $member->password = $req->input('password'); // Updated to use 'password'
+                $member->email = $req->input('email'); // Updated to use 'email'
+                $member->save();
+                return back()->with('success','Form submitted successfully!');
+                //return response()->json(['message' => 'User added successfully'], 201);
+        
         //if no errors return success message
-        return back()->with('success','Form submitted successfully!');
+       // return back()->with('success','Form submitted successfully!');
         
     }
 }
