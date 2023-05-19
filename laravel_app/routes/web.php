@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormValidation;
+use App\Http\Controllers\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,4 @@ Route::view('/', 'Pages.welcome') ;
 Route::post('/index', [FormValidation::class,'checkErrors'])->name('checkErrors');
 Route::view('/index', 'Pages.Index');
 Route::view('/register', 'Pages.Index');
-
+Route::get('/getActorsName',[Api::class,'getActorsName'])->name('getActorsName');

@@ -21,6 +21,39 @@
     }
 </style>
 @include('Pages.Header')
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+    function getActors(){
+        //YYYY-MM-DD yyyy->[0] , mm->[1] , dd->[2]
+        var month = document.getElementById("birthdate").value.split("-")[1];
+        var day = document.getElementById("birthdate").value.split("-")[2];        
+        if(typeof month == "undefined"|| month == null || month === "" || typeof day == "undefined"|| day == null || day === ""){
+            alert("Please enter a date");
+            return;
+        }
+        $.ajax({
+            type: "GET",
+            url: "{{ route('getActorsName') }}",
+            data: {month: month, day: day},
+            success: function(data){
+                var actors = document.getElementById("actors");
+                actors.innerHTML = "";
+                for(var i=0; i<data.length; i++){
+                    var li = document.createElement("li");
+                    li.appendChild(document.createTextNode(data[i]));
+                    actors.appendChild(li);
+                }
+            }
+        });
+    }
+</script>
+
+
 <div id="form">
     <form method="post" action="{{ route('checkErrors') }}" >  
         @csrf
@@ -33,7 +66,8 @@
         <br><br>
         Birthdate: <input type="date" id = "birthdate" name="birthdate" placeholder="Enter your birthdate" value="{{ old('birthdate') }}">
         <span class="error">* @error ('birthdate') {{$message}} @enderror</span>
-        <!-- <button type="button" onclick= "getActors()">actor’s names born on the same day</button> -->
+        <button type="button" onclick= "getActors()">actor’s names born on the same day</button>
+        <ol id="actors"></ol>
         <br><br>
         <!-- <ol id="actors"></ol>-->
         Phone: <input type="text" name="phone" placeholder="Enter your phone" value="{{ old('phone') }}">
