@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormValidation;
 use App\Http\Controllers\Api;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\LocalizationController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +18,23 @@ use App\Http\Controllers\MailController;
 |
 */
 
-Route::group(['prefix', '{locale}'], function () {
+Route::group(
+    [
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+],
+function(){
+    Route::get('/', function () {
+        return view('Pages.welcome');
+    });
+    Route::get('/register', function () {
+        return view('Pages.Index');
+    });
+    Route::post('/index', [FormValidation::class,'checkErrors'])->name('checkErrors');
+}
+);
 
-    Route::get('/', function () {return view('/', 'Pages.welcome');})->middleware('setLocale');
-});
 Route::view('/', 'Pages.welcome') ;
-Route::post('/index', [FormValidation::class,'checkErrors'])->name('checkErrors');
 Route::view('/index', 'Pages.Index');
 Route::view('/register', 'Pages.Index');
 Route::get('/getActorsName',[Api::class,'getActorsName'])->name('getActorsName');

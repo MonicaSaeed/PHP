@@ -37,8 +37,8 @@
                         @lang('messages.changeLanguage')
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{url ('en')}}">@lang('messages.en')</a></li>
-                        <li><a class="dropdown-item" href="{{url ('ar')}}">@lang('messages.ar')</a></li>
+                        <li><a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL('en') }}">@lang('messages.en')</a></li>
+                        <li><a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL('ar') }}">@lang('messages.ar')</a></li>
                         
                     </ul>
                 </div>
