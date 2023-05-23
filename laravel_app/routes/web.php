@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormValidation;
 use App\Http\Controllers\Api;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::post('/index', [FormValidation::class,'checkErrors'])->name('checkErrors'
 Route::view('/index', 'Pages.Index');
 Route::view('/register', 'Pages.Index');
 Route::get('/getActorsName',[Api::class,'getActorsName'])->name('getActorsName');
+Route::get('send-mail',[MailController::class,'index']);

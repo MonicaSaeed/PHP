@@ -3,6 +3,9 @@
      <div class="alert alert-success">
          {{ Session::get('success') }}
      </div>
+     <?php
+    event(new \App\Events\NewUserRegistered());
+    ?>
 @endif
 
 
