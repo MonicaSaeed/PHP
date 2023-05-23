@@ -33,8 +33,5 @@ function(){
 }
 );
 
-Route::view('/', 'Pages.welcome') ;
-Route::view('/index', 'Pages.Index');
-Route::view('/register', 'Pages.Index');
 Route::get('/getActorsName',[Api::class,'getActorsName'])->name('getActorsName');
 Route::get('send-mail',[MailController::class,'index']);
