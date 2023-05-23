@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Footer</title>
+    <title>@lang('messages.footer')</title>
     <link href="/CSS/style.css" rel="stylesheet">
 </head>
 
@@ -11,9 +11,9 @@
 
 <footer>
         <div class="footer-content">
-            <p>&copy; 2023 Page registeration</p>
+            <p>@lang('messages.footerContent')</p>
             <ul>
-                <li><a href="#help">HELP?</a></li>
+                <li><a href="#help">@lang('messages.help')</a></li>
 
             </ul>
         </div>

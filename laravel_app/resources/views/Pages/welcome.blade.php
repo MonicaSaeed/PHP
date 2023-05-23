@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome PAGE</title>
+    <title> @lang('messages.welcomeTitle') </title>
       
    
     <link rel="stylesheet" href="../Style.css">
 </head>
 <body>
 <div>
-        <h1  style="text-align:center;"> Welcome to our application</h1>  
+        <h1  style="text-align:center;">@lang('messages.welcome')</h1>  
        </div>
 </body>
 @include('Pages.Footer')

@@ -34,18 +34,18 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button"
                     id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
-                        Change Language
+                        @lang('messages.changeLanguage')
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{url ('en')}}">English</a></li>
-                        <li><a class="dropdown-item" href="{{url ('ar')}}">Arabic</a></li>
+                        <li><a class="dropdown-item" href="{{url ('en')}}">@lang('messages.en')</a></li>
+                        <li><a class="dropdown-item" href="{{url ('ar')}}">@lang('messages.ar')</a></li>
                         
                     </ul>
                 </div>
             </div>
             <ul>
-            <li><a href="{{ url('/') }}">Home Page</a></li>
-            <li><a href="{{ url('/register') }}">Register</a></li>
+            <li><a href="{{ url('/') }}">@lang('messages.homePage')</a></li>
+            <li><a href="{{ url('/register') }}">@lang('messages.register')</a></li>
 
 
 
@@ -57,3 +57,4 @@
 </body>
 
 </html>
+
