@@ -17,7 +17,7 @@ class FormValidationTest extends TestCase
     {
         $validData = [
             'name' => 'liaat',
-            'user_name' => 'btas',
+            'user_name' => 'btarrs',
             'birthdate' => '1990-01-01',
             'phone' => '01234544890',
             'address' => '123 Street, City',

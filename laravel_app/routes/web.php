@@ -35,7 +35,7 @@ function(){
 
 
 Route::view('/','Pages.welcome');
-Route::post('/index', [FormValidation::class, 'checkErrors'])->name('checkErrors');
-Route::view('/register','Pages.Index');
+//Route::post('/index', [FormValidation::class, 'checkErrors'])->name('checkErrors');
+//Route::view('/register','Pages.Index');
 Route::get('/getActorsName',[Api::class,'getActorsName'])->name('getActorsName');
 Route::get('send-mail',[MailController::class,'index']);
