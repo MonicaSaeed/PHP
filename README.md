@@ -1,5 +1,5 @@
 # PHP & Laravel
-![image](https://github.com/MonicaSaeed/PHP/assets/101058082/ad704a91-d6aa-4796-be1b-aba582885699.PNG)
+![image](https://github.com/MonicaSaeed/PHP/assets/101058082/bb76f9bb-bb48-4e9c-8a3c-1d4f163ca005.PNG)
 ## PHP
 Registration web page that inserts a user data into MySQL database, the details are as follow:<br>
 1. The form includes a user personal detail: full_name, user_name, birthdate, phone, address, 
