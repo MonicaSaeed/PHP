@@ -25,15 +25,8 @@ The same feature implemented  In addition: <br>
 2. Include one automated test function using Laravel testing.<br>
 3. Apply Laravel multi-language feature.
 ### To run Laravel code, follow these steps:
-1. would like to use PHP’s built-in development server, you may use the serve Artisan command: php artisan serve. By default the HTTP-server will listen to port 8000.
-2. write this command in terminal.
+1. would like to use PHP’s built-in development server, you may use the serve Artisan command: 
 ```
 php artisan serve
-```
-
-
-
-
-
-
-
+``` 
+By default the HTTP-server will listen to port 8000.
